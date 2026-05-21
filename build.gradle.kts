@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.3.10"
+    kotlin("plugin.jpa") version "2.3.10"
 }
 
 group = "es.ujaen"
@@ -10,6 +11,9 @@ repositories {
 }
 
 dependencies {
+    implementation("com.h2database:h2:2.4.240")
+    implementation("org.hibernate.orm:hibernate-core:7.3.5.Final")
+
     testImplementation(kotlin("test"))
 }
 
