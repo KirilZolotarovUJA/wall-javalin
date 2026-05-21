@@ -1,6 +1,7 @@
 package es.ujaen.wall
 
 import es.ujaen.wall.exception.PostNotFoundException
+import es.ujaen.wall.exception.ValidationException
 import es.ujaen.wall.model.PostCreateRequest
 import es.ujaen.wall.repository.PostRepository
 import es.ujaen.wall.repository.createSessionFactory
@@ -21,6 +22,10 @@ fun main() {
     Javalin.create { config ->
         config.routes.exception(PostNotFoundException::class.java) { e, ctx ->
             ctx.status(404).json(mapOf("message" to e.message))
+        }
+
+        config.routes.exception(ValidationException::class.java) { e, ctx ->
+            ctx.status(400).json(mapOf("message" to e.message))
         }
 
         config.routes.get("/api/post") { ctx ->
